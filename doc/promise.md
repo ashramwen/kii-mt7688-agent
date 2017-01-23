@@ -16,8 +16,11 @@ gatewayAgent.onboardGatewayByOwner(
     }
 );
 ```
+
 在 then 中有兩個 function
+
 第一個是 http request 呼叫**成功**後會執行的程式
+
 第二個是 http request 呼叫**失敗**時會執行的程式
 
 由於是非同步 (async) 的執行，所以如果要按照順序執行 http request 的方法的話則要照此方式寫
@@ -43,9 +46,12 @@ gatewayAgent.onboardGatewayByOwner( // 1. 執行 onboardGatewayByOwner
 ```
 
 這是 javascript 的一種寫法，叫 promise chains
+
 按照順序執行
+
 1. 執行 onboardGatewayByOwner
 2. onboardGatewayByOwner 呼叫成功後，執行 onboardEndnodeByOwner
 3. onboardEndnodeByOwner 呼叫成功後，執行 updateEndnodeState
+
 把要繼續呼叫的程式放在 then 的第一個 success function 中，注意前面要有 **return**
 這樣才會繼續往下執行

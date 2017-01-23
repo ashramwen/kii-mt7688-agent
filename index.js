@@ -4,7 +4,7 @@ const appID = 'a333fe49';
 const appKey = 'ddab3f01d0eda5b73051c660134359fc';
 const site = 'https://api-sg.kii.com';
 
-const ownerToken = 'wZvqF-7S7WmvGmBu6WTN7_kB_DCtDke9yHbUNz3fEOc1';
+const ownerToken = 'wZvqF-7S7WmvGmBu6WTN7_kB_DCtDke9yHbUNz3fEOc';
 const ownerID = '7c698b427320-f689-6e11-91ed-00c48d05';
 
 gatewayAgent.init(appID, appKey, site);
@@ -29,7 +29,7 @@ gatewayAgent.onboardGatewayByOwner(
         console.log('onboardEndnodeByOwner', chainOutput);
         return gatewayAgent.updateEndnodeState(
             ownerToken, // owner token
-            'th.ba28b2d34b60-270b-6e11-c1ed-0f4ff2801', // endnode thingID for Donkey
+            'th.ba28b2d34b60-270b-6e11-c1ed-0f4ff280', // endnode thingID for Donkey
             {
                 'batteryAlias': {
                     'power': true

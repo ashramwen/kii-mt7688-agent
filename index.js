@@ -1,35 +1,28 @@
-var gatewayAgent = require('kii-gateway-agent');
+var GatewayAgent = require('kii-gateway-agent');
 
 const appID = 'a333fe49';
 const appKey = 'ddab3f01d0eda5b73051c660134359fc';
 const site = 'https://api-sg.kii.com';
-
-const ownerToken = 'wZvqF-7S7WmvGmBu6WTN7_kB_DCtDke9yHbUNz3fEOc';
+const ownerToken = 'h6QKPtb8S2THnUusf6xMCXUv2MWzmRbZY8TVf0_Mzxc';
 const ownerID = '7c698b427320-f689-6e11-91ed-00c48d05';
 
+const gatewayThingID = 'th.ba28b2d34b60-3deb-6e11-412e-0e56ca79';
+const endnodeThingID = 'th.ba28b2d34b60-3deb-6e11-412e-0dad41ca';
+
+var gatewayAgent = new GatewayAgent.KiiGatewayAgent();
 gatewayAgent.init(appID, appKey, site);
-gatewayAgent.onboardGatewayByOwner(
-        ownerToken, // owner token
-        ownerID, //owner userid
-        'BABY5', //gateway vendorThingID
-        '123123', //gateway password
-        'toy', // thing type
-        undefined) // thing properties
+gatewayAgent.setUser(ownerToken, ownerID);
+gatewayAgent.onboardGatewayByOwner()
     .then(function (chainOutput) {
         console.log('onboardGatewayByOwner', chainOutput);
         return gatewayAgent.onboardEndnodeByOwner(
-            ownerToken, // owner token
-            ownerID, //owner userid
             'Donkey', // endnode vendorThingID
-            '123123', // endnode password
-            'toy', // endnode type
             undefined // endnode properties
         );
-    }).then(function(chainOutput) {
+    }).then(function (chainOutput) {
         console.log('onboardEndnodeByOwner', chainOutput);
         return gatewayAgent.updateEndnodeState(
-            ownerToken, // owner token
-            'th.ba28b2d34b60-270b-6e11-c1ed-0f4ff280', // endnode thingID for Donkey
+            endnodeThingID, // endnode thingID for Donkey
             {
                 'batteryAlias': {
                     'power': true
@@ -39,6 +32,6 @@ gatewayAgent.onboardGatewayByOwner(
                 }
             } // endnode states
         )
-    }).then(function(res) {
+    }).then(function (res) {
         console.log('updateEndnodeState', res);
     });

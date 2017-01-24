@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "kii-gateway-agent": "0.0.12"
+    "kii-gateway-agent": "^0.1.0"
   }
 }

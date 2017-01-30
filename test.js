@@ -10,8 +10,8 @@ const gatewayThingID = 'th.ba28b2d34b60-3deb-6e11-412e-0e56ca79';
 const endnodeThingID = 'th.ba28b2d34b60-3deb-6e11-412e-0dad41ca';
 
 var gatewayAgent = new KiiGatewayAgent();
-gatewayAgent.setApp(appID, appKey, site);
-gatewayAgent.setUser(ownerToken, ownerID);
+gatewayAgent.setTemporaryApp(appID, appKey, site);
+gatewayAgent.setTemporaryUser(ownerToken, ownerID);
 gatewayAgent.onboardGatewayByOwner().then(function (chainOutput) {
     console.log('onboardGatewayByOwner', chainOutput);
     return gatewayAgent.onboardEndnodeByOwner(

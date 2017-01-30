@@ -13,9 +13,3 @@ npm install
 ```sh
 npm start
 ```
-
-or
-
-```sh
-node index.js
-```

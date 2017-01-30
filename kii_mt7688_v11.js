@@ -39,6 +39,8 @@ var binaryString = require('math-uint32-to-binary-string');
 var fromBits = require('math-float32-from-bits');
 //var mcs			= require('mcsjs');
 
+var kii = require('./kii');
+
 var node_active_md_binary, node_active_total_binary, node_app_md_binary, node_app_total_binary; //binary variables
 var node_active_md_float, node_active_total_float, node_app_md_float, node_app_total_float; //float value converted
 var counter = 0;

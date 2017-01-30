@@ -11,6 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "kii-gateway-agent": "^0.1.3"
+    "kii-gateway-agent": "^0.1.4"
   }
 }

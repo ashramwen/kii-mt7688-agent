@@ -1,15 +1,16 @@
 {
-  "name": "kii-gateway-agent-sample",
-  "version": "1.0.0",
+  "name": "kii-mt7688-agent",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "kii_mt7688_v11.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "init": "node init.js",
+    "start": "node kii_mt7688_v11.js",
+    "test": "node test.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "kii-gateway-agent": "^0.1.0"
+    "kii-gateway-agent": "^0.1.3"
   }
 }

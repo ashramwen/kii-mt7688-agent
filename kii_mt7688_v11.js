@@ -103,6 +103,20 @@ app.post('/upload', function (req, res) {
 	console.log("Timestamp:" + ts + " Device:" + node_address + " Channel:" + node_channel + " Command:" + node_command + " Status:" + node_status + " ActiveMD:" + node_active_md_float + " ApparentMD:" + node_app_md_float + " ActiveTotal:" + node_active_total_float + " ApparentTotal:" + node_app_total_float + "\n");
 	//counter++;
 
+	/* onboard endnode by endnode vendorThingID */
+	if (kii.detectEndnodeOnboardingStatus(node_address)) {
+
+	} else {
+		kii.onboardEndnodeByOwner(node_address);
+	}
+
+	/* update endnode status */
+	// kii.updateEndnodeState(node_address, node_status);
+
+	/* update endnode connection */
+	// kii.updateEndnodeConnectivity(node_address, true);
+
+
 	/* Upload to MCS using MQTT, this is an sample code that worked*/
 	/*switch(counter)
 	{

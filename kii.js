@@ -22,7 +22,7 @@ function onboardGateway(retry) {
     });
 }
 onboardGateway();
-setTimeout(function () {
+setInterval(function () {
     kii.updateEndnodeOnline();
 }, INTERVAL);
 

@@ -104,18 +104,17 @@ app.post('/upload', function (req, res) {
 	//counter++;
 
 	/* onboard endnode by endnode vendorThingID */
-	if (kii.detectEndnodeOnboardingStatus(node_address)) {
-
+	var vendorThingID = node_address.replace(/:/g, ''); // remove ':'
+	var endnode = kii.getEndnode(vendorThingID);
+	if (endnode) {
+		kii.updateEndnodeState(vendorThingID, node_status);
 	} else {
-		kii.onboardEndnodeByOwner(node_address);
+		kii.onboardEndnodeByOwner(vendorThingID).then(function (res) {
+			kii.updateEndnodeState(vendorThingID, node_status);
+		}, function (err) {
+			console.log('endnode onboard error:', err);
+		});
 	}
-
-	/* update endnode status */
-	// kii.updateEndnodeState(node_address, node_status);
-
-	/* update endnode connection */
-	// kii.updateEndnodeConnectivity(node_address, true);
-
 
 	/* Upload to MCS using MQTT, this is an sample code that worked*/
 	/*switch(counter)

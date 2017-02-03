@@ -8,11 +8,6 @@
     "ownerToken": "ownerToken",
     "userID": "userID"
   },
-  "gateway": {
-    "type": "EnergyGateway",
-    "password": "12345",
-    "vendorThingID": "3c15c2d23a38",
-    "accessToken": "ownerToken"
-  },
+  "gateway": {},
   "endNodes": []
 }

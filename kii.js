@@ -1,6 +1,7 @@
 var KiiGatewayAgent = require('kii-gateway-agent');
 var kii = new KiiGatewayAgent();
 
+var INTERVAL = 300000; // 5 mins
 var i = 0;
 
 function onboardGateway(retry) {
@@ -21,5 +22,8 @@ function onboardGateway(retry) {
     });
 }
 onboardGateway();
+setTimeout(function () {
+    kii.updateEndnodeOnline();
+}, INTERVAL);
 
 module.exports = exports = kii;

@@ -21,7 +21,7 @@ gatewayAgent.onboardGatewayByOwner().then(function (chainOutput) {
 }).then(function (chainOutput) {
     console.log('onboardEndnodeByOwner', chainOutput);
     return gatewayAgent.updateEndnodeState(
-        endnodeThingID, // endnode thingID for Donkey
+        'Donkey', // endnode vendorThingID
         {
             'batteryAlias': {
                 'power': true

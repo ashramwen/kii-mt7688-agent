@@ -104,7 +104,7 @@ app.post('/upload', function (req, res) {
 	//counter++;
 
 	/* onboard endnode by endnode vendorThingID */
-	var vendorThingID = node_address.replace(/:/g, ''); // remove ':'
+	// var vendorThingID = node_address.replace(/:/g, ''); // remove ':'
 	var endnode = kii.getEndnode(vendorThingID);
 	if (endnode) {
 		kii.updateEndnodeState(vendorThingID, node_status);

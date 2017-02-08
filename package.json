@@ -2,15 +2,15 @@
   "name": "kii-mt7688-agent",
   "version": "0.0.1",
   "description": "",
-  "main": "kii_mt7688_v11.js",
+  "main": "index.js",
   "scripts": {
     "init": "node init.js",
-    "start": "node kii_mt7688_v11.js",
+    "start": "node index.js",
     "test": "node test.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "kii-gateway-agent": "^0.1.6"
+    "kii-gateway-agent": "^0.1.8"
   }
 }

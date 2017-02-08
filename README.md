@@ -24,7 +24,7 @@ Also you need to install 2 extra packages manually in the gateway.
 npm install express
 npm install jju
 ```
-Both of them can not be bundled into the dist.
+Neither of them can be bundled into the dist.
 
 After then, you can run it.
 ```sh

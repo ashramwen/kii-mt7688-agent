@@ -5,9 +5,8 @@
 * [Development] (#Development)
 
 <a name="Bundle"></a>
-## Bundling
+## Creating a build
 ```sh
-# Bundle the project
 webpack
 ```
 The build artifacts will be stored in the `dist/` directory.

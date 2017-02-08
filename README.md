@@ -20,7 +20,7 @@ main.js # is the main file.
 ```
 Copy `main.js` into the gateway.
 
-Also you need to instal 2 extra packages manually in the gateway.
+Also you need to install 2 extra packages manually in the gateway.
 ```sh
 npm install express
 npm install jju

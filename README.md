@@ -1,15 +1,40 @@
-# kii-gateway-agent-sample
+# kii-mt7688-agent
 
-* [Installation] (#install)
+* [Bundle] (#Bundle)
+* [Deploy] (#Deploy)
+* [Development] (#Development)
 
-<a name="install"></a>
-## Installation
+<a name="Bundle"></a>
+## Bundling
 ```sh
-npm install
+# Bundle the project
+webpack
+```
+The build artifacts will be stored in the `dist/` directory.
+
+<a name="Deploy"></a>
+## Deploy
+In the `dist/` directory,
+```
+main.js # is the main file.
+```
+Copy `main.js` into the gateway.
+
+Also you need to instal 2 extra packages manually in the gateway.
+```sh
+npm install express
+npm install jju
+```
+Both of them can not be bundled into the dist.
+
+After then, you can run it.
+```sh
+node main.js
 ```
 
-<a name="start"></a>
-## Run it
+<a name="Development"></a>
+## Installation
 ```sh
-npm start
+# Install the dependencies
+npm install
 ```

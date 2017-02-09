@@ -53,13 +53,13 @@ The `app` and `user` sections need to be set.
 
 <a name="Serving"></a>
 ## Serving
-After deploy and configuration, we can run it.
+After [deploy] (#Deploy) and [configuration] (#Configuration), we can run it.
 ```sh
 node main.js
 ```
 
 <a name="Development"></a>
-## Installation
+## Development
 ```sh
 # Install the dependencies
 npm install

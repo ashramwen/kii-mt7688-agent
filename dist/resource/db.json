@@ -1,0 +1,13 @@
+{
+  "app": {
+    "appID": "appID",
+    "appKey": "appKey",
+    "site": "https://api-sg.kii.com"
+  },
+  "user": {
+    "ownerToken": "ownerToken",
+    "userID": "userID"
+  },
+  "gateway": {},
+  "endNodes": []
+}

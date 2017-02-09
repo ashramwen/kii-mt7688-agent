@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 var fs = require('fs');
 
@@ -37,6 +38,10 @@ module.exports = function () {
       path: path.resolve(__dirname, 'dist')
     },
     plugins: [
+      new CopyWebpackPlugin([{
+        from: 'resource',
+        to: 'resource'
+      }])
       // new webpack.optimize.CommonsChunkPlugin({
       //   names: 'vendor'
       // })

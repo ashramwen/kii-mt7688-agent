@@ -33,6 +33,7 @@ npm install jju
 Neither of them can be bundled into the dist.
 
 <a name="Configuration"></a>
+## Configuration
 Before serving the service, we have to configure `resource/db.json` first.
 ```javascript
 {
@@ -51,6 +52,7 @@ Before serving the service, we have to configure `resource/db.json` first.
 The `app` and `user` sections need to be set.
 
 <a name="Serving"></a>
+## Serving
 After deploy and configuration, we can run it.
 ```sh
 node main.js

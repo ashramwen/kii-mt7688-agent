@@ -22,7 +22,7 @@ In the `dist/` directory,
 └── resource
     └── db.json  # configuration
 ```
-All we need is `main.js` and `resource/db.json`.
+All we need are `main.js` and `resource/db.json`.
 Copy these two files with their structure into the gateway.
 
 Also We need to install 2 additional packages manually in the gateway.

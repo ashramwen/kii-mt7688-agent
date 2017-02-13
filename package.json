@@ -2,11 +2,11 @@
   "name": "kii-mt7688-agent",
   "version": "0.0.1",
   "description": "",
-  "main": "kii_mt7688_v11.js",
+  "main": "./src/main.js",
   "scripts": {
-    "init": "node init.js",
-    "start": "node kii_mt7688_v11.js",
-    "test": "node test.js"
+    "init": "node ./src/init.js",
+    "start": "node ./src/main.js",
+    "test": "node ./src/test.js"
   },
   "author": "",
   "license": "ISC",

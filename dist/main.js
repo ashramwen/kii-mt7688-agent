@@ -42826,14 +42826,24 @@ app.post('/upload', function (req, res) {
 	console.log("Timestamp:" + ts + " Device:" + node_address + " Channel:" + node_channel + " Command:" + node_command + " Status:" + node_status + " ActiveMD:" + node_active_md_float + " ApparentMD:" + node_app_md_float + " ActiveTotal:" + node_active_total_float + " ApparentTotal:" + node_app_total_float + "\n");
 	//counter++;
 
+	function updateEndnodeStateError(err) {
+		console.log('endnode updateState error:', err);
+	}
+
 	/* onboard endnode by endnode vendorThingID */
 	var vendorThingID = node_address.replace(/:/g, ''); // remove ':'
 	var endnode = kii.getEndnode(vendorThingID);
+	var thingStatus = {
+		'activeTotal': node_active_total_float,
+		'activeMD': node_active_md_float,
+		'apparentTotal': node_app_total_float,
+		'apparentMD': node_app_md_float
+	}
 	if (endnode) {
-		kii.updateEndnodeState(vendorThingID, node_status);
+		kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
 	} else {
 		kii.onboardEndnodeByOwner(vendorThingID).then(function (res) {
-			kii.updateEndnodeState(vendorThingID, node_status);
+			kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
 		}, function (err) {
 			console.log('endnode onboard error:', err);
 		});

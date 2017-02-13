@@ -789,7 +789,7 @@ var PrivateKey = __webpack_require__(7);
 var edCompat;
 
 try {
-	edCompat = __webpack_require__(151);
+	edCompat = __webpack_require__(152);
 } catch (e) {
 	/* Just continue through, and bail out if we try to use it. */
 }
@@ -798,12 +798,12 @@ var InvalidAlgorithmError = errs.InvalidAlgorithmError;
 var KeyParseError = errs.KeyParseError;
 
 var formats = {};
-formats['auto'] = __webpack_require__(152);
+formats['auto'] = __webpack_require__(153);
 formats['pem'] = __webpack_require__(18);
 formats['pkcs1'] = __webpack_require__(115);
 formats['pkcs8'] = __webpack_require__(43);
 formats['rfc4253'] = __webpack_require__(24);
-formats['ssh'] = __webpack_require__(153);
+formats['ssh'] = __webpack_require__(154);
 formats['ssh-private'] = __webpack_require__(54);
 formats['openssh'] = formats['ssh-private'];
 
@@ -1065,7 +1065,7 @@ var edCompat;
 var ed;
 
 try {
-	edCompat = __webpack_require__(151);
+	edCompat = __webpack_require__(152);
 } catch (e) {
 	/* Just continue through, and bail out if we try to use it. */
 }
@@ -1077,7 +1077,7 @@ var KeyParseError = errs.KeyParseError;
 var KeyEncryptedError = errs.KeyEncryptedError;
 
 var formats = {};
-formats['auto'] = __webpack_require__(152);
+formats['auto'] = __webpack_require__(153);
 formats['pem'] = __webpack_require__(18);
 formats['pkcs1'] = __webpack_require__(115);
 formats['pkcs8'] = __webpack_require__(43);
@@ -9768,7 +9768,7 @@ var Identity = __webpack_require__(44);
 
 var formats = {};
 formats['openssh'] = __webpack_require__(257);
-formats['x509'] = __webpack_require__(154);
+formats['x509'] = __webpack_require__(155);
 formats['pem'] = __webpack_require__(258);
 
 var CertificateParseError = errs.CertificateParseError;
@@ -11628,7 +11628,7 @@ exports.badImplementation = function (message, data) {
 
 // Load modules
 
-var Sntp = __webpack_require__(150);
+var Sntp = __webpack_require__(151);
 var Boom = __webpack_require__(48);
 
 
@@ -13694,7 +13694,7 @@ function readSSHPrivate(type, buf, options) {
 		var rounds = kdfOptsBuf.readInt();
 		var cinf = utils.opensshCipherInfo(cipher);
 		if (bcrypt === undefined) {
-			bcrypt = __webpack_require__(137);
+			bcrypt = __webpack_require__(138);
 		}
 
 		if (typeof (options.passphrase) === 'string') {
@@ -13815,7 +13815,7 @@ function write(key, options) {
 		kdfopts = kdfssh.toBuffer();
 
 		if (bcrypt === undefined) {
-			bcrypt = __webpack_require__(137);
+			bcrypt = __webpack_require__(138);
 		}
 		var pass = new Uint8Array(passphrase);
 		var salti = new Uint8Array(salt);
@@ -37572,7 +37572,7 @@ module.exports = require("tty");
 
 "use strict";
 
-var Q = __webpack_require__(145);
+var Q = __webpack_require__(146);
 var low = __webpack_require__(235);
 var fs = __webpack_require__(19);
 var KiiHelper_1 = __webpack_require__(226);
@@ -37729,6 +37729,40 @@ module.exports = KiiGatewayAgent;
 
 /***/ }),
 /* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var KiiGatewayAgent = __webpack_require__(130);
+var kii = new KiiGatewayAgent();
+
+var INTERVAL = 300000; // 5 mins
+var i = 0;
+
+function onboardGateway(retry) {
+    kii.onboardGatewayByOwner().then(function (res) {
+        if (res.thingID) {
+            console.log('Gateway onboarding is done.')
+        } else {
+            console.log('Gateway onboard failed. Retry in 5 secs: ' + ++i + ' times.')
+            setTimeout(function () {
+                onboardGateway();
+            }, 5000);
+        }
+    }, function () {
+        console.log('Gateway onboard failed. Retry in 5 secs.')
+        setTimeout(function () {
+            onboardGateway();
+        }, 5000);
+    });
+}
+onboardGateway();
+setInterval(function () {
+    kii.updateEndnodeOnline();
+}, INTERVAL);
+
+module.exports = exports = kii;
+
+/***/ }),
+/* 132 */
 /***/ (function(module, exports) {
 
 // API
@@ -37763,7 +37797,7 @@ function clean(key)
 
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var defer = __webpack_require__(170);
@@ -37803,11 +37837,11 @@ function async(callback)
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var async = __webpack_require__(132)
-  , abort = __webpack_require__(131)
+var async = __webpack_require__(133)
+  , abort = __webpack_require__(132)
   ;
 
 // API
@@ -37884,7 +37918,7 @@ function runJob(iterator, key, item, callback)
 
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports) {
 
 // API
@@ -37927,11 +37961,11 @@ function state(list, sortMethod)
 
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var abort = __webpack_require__(131)
-  , async = __webpack_require__(132)
+var abort = __webpack_require__(132)
+  , async = __webpack_require__(133)
   ;
 
 // API
@@ -37962,12 +37996,12 @@ function terminator(callback)
 
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var iterate    = __webpack_require__(133)
-  , initState  = __webpack_require__(134)
-  , terminator = __webpack_require__(135)
+var iterate    = __webpack_require__(134)
+  , initState  = __webpack_require__(135)
+  , terminator = __webpack_require__(136)
   ;
 
 // Public API
@@ -38043,7 +38077,7 @@ function descending(a, b)
 
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38606,7 +38640,7 @@ module.exports = {
 
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var util = __webpack_require__(0);
@@ -38800,7 +38834,7 @@ CombinedStream.prototype._emitError = function(err) {
 
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Load modules
@@ -38874,7 +38908,7 @@ exports.fixedTimeComparison = function (a, b) {
 
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -39046,7 +39080,7 @@ function dumpException(ex)
 
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39074,7 +39108,7 @@ function clone (obj) {
 
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39130,7 +39164,7 @@ module.exports = schemas
 
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var stream = __webpack_require__(4)
@@ -39163,7 +39197,7 @@ module.exports.isDuplex   = isDuplex
 
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var exec = __webpack_require__(126).exec;
@@ -39185,7 +39219,7 @@ module.exports = function (iface, callback) {
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // vim:ts=4:sts=4:sw=4:
@@ -41239,7 +41273,7 @@ return Q;
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41264,7 +41298,7 @@ module.exports = {
 
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41272,7 +41306,7 @@ module.exports = {
 
 var stringify = __webpack_require__(244);
 var parse = __webpack_require__(243);
-var formats = __webpack_require__(146);
+var formats = __webpack_require__(147);
 
 module.exports = {
     formats: formats,
@@ -41282,7 +41316,7 @@ module.exports = {
 
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41469,7 +41503,7 @@ exports.isBuffer = function (obj) {
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41515,13 +41549,13 @@ exports.jar = function(store) {
 
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(255);
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Copyright 2015 Joyent, Inc.
@@ -41623,7 +41657,7 @@ Signer.prototype.sign = function () {
 
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Copyright 2015 Joyent, Inc.
@@ -41639,7 +41673,7 @@ var Key = __webpack_require__(6);
 var PrivateKey = __webpack_require__(7);
 
 var pem = __webpack_require__(18);
-var ssh = __webpack_require__(153);
+var ssh = __webpack_require__(154);
 var rfc4253 = __webpack_require__(24);
 
 function read(buf, options) {
@@ -41702,7 +41736,7 @@ function write(key, options) {
 
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Copyright 2015 Joyent, Inc.
@@ -41822,7 +41856,7 @@ function write(key, options) {
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Copyright 2016 Joyent, Inc.
@@ -42312,7 +42346,7 @@ function writeTBSCert(cert, der) {
 
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42380,7 +42414,7 @@ exports.pathMatch = pathMatch;
 
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42415,7 +42449,7 @@ exports.pathMatch = pathMatch;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-var pubsuffix = __webpack_require__(157);
+var pubsuffix = __webpack_require__(158);
 
 // Gives the permutation of all possible domainMatch()es of a given domain. The
 // array is in shortest-to-longest order.  Handy for indexing.
@@ -42443,7 +42477,7 @@ exports.permuteDomain = permuteDomain;
 
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42454,7 +42488,7 @@ exports.permuteDomain = permuteDomain;
 
 
 
-var punycode = __webpack_require__(161);
+var punycode = __webpack_require__(162);
 
 module.exports.getPublicSuffix = function getPublicSuffix(domain) {
   /*!
@@ -42548,7 +42582,7 @@ var index = module.exports.index = Object.freeze(
 
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42626,7 +42660,7 @@ Store.prototype.getAllCookies = function(cb) {
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports) {
 
 /**
@@ -42655,7 +42689,7 @@ module.exports = bytesToUuid;
 
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Unique ID creation requires a high quality random # generator.  In node.js
@@ -42671,50 +42705,16 @@ module.exports = rng;
 
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports) {
 
 module.exports = require("punycode");
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports) {
 
 module.exports = require("tls");
-
-/***/ }),
-/* 163 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var KiiGatewayAgent = __webpack_require__(130);
-var kii = new KiiGatewayAgent();
-
-var INTERVAL = 300000; // 5 mins
-var i = 0;
-
-function onboardGateway(retry) {
-    kii.onboardGatewayByOwner().then(function (res) {
-        if (res.thingID) {
-            console.log('Gateway onboarding is done.')
-        } else {
-            console.log('Gateway onboard failed. Retry in 5 secs: ' + ++i + ' times.')
-            setTimeout(function () {
-                onboardGateway();
-            }, 5000);
-        }
-    }, function () {
-        console.log('Gateway onboard failed. Retry in 5 secs.')
-        setTimeout(function () {
-            onboardGateway();
-        }, 5000);
-    });
-}
-onboardGateway();
-setInterval(function () {
-    kii.updateEndnodeOnline();
-}, INTERVAL);
-
-module.exports = exports = kii;
 
 /***/ }),
 /* 164 */,
@@ -42727,18 +42727,18 @@ module.exports = exports = kii;
   Dated:	12/01/17
 
   Functionality:
-  
+
   1)HTTP Server to receive http post from MT7687F remote nodes
 
   2)TCP Server to handle the socket commands from cloud
 
   3)Data received in a mixture of bytes & uint32 decimals
 
-  4)2 Bytes will rep the Device ID, 1 byte will rep the Channel, Command, Status 
+  4)2 Bytes will rep the Device ID, 1 byte will rep the Channel, Command, Status
     while uint32 decimal will rep the 4 different real-time readings from Renesas MCU
 
   5)2 stage conversion process of the uint32 decimals are done first convert the decimal into binary bits,
-    then the binary bits are converted to single-precision float 
+    then the binary bits are converted to single-precision float
     (to prevent any loss of data due to conversion)
  */
 
@@ -42754,18 +42754,20 @@ global.node_active_total = "";
 global.node_app_total = "";
 
 //Module dependency
-const express		= __webpack_require__(127);
-const bodyParser	= __webpack_require__(28);
-var net			= __webpack_require__(8);
-var LCD			= __webpack_require__(128);
-var binaryString	= __webpack_require__(30);
-var fromBits		= __webpack_require__(29);
+const express = __webpack_require__(127);
+const bodyParser = __webpack_require__(28);
+var net = __webpack_require__(8);
+var LCD = __webpack_require__(128);
+var binaryString = __webpack_require__(30);
+var fromBits = __webpack_require__(29);
 //var mcs			= require('mcsjs');
 
-var node_active_md_binary, node_active_total_binary, node_app_md_binary, node_app_total_binary;//binary variables
-var node_active_md_float, node_active_total_float, node_app_md_float, node_app_total_float;//float value converted
+var kii = __webpack_require__(131);
+
+var node_active_md_binary, node_active_total_binary, node_app_md_binary, node_app_total_binary; //binary variables
+var node_active_md_float, node_active_total_float, node_app_md_float, node_app_total_float; //float value converted
 var counter = 0;
-	
+
 //init MCS MQTT
 /*var myApp = mcs.register({
 	deviceId: 'DkSdHB3Y',
@@ -42781,192 +42783,185 @@ var clients = [];
 
 /*** HTTP Server for the MT7687 Clients ***/
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 app.use(bodyParser.json());
 
 //Process the client GET request
-app.get('/',function(req,res){
-  res.sendFile("index.html");
+app.get('/', function (req, res) {
+	res.sendFile("index.html");
 });
 
-app.listen(8080,function()
-{
-  console.log("HTTP Server:PORT 8080");
+app.listen(8080, function () {
+	console.log("HTTP Server:PORT 8080");
 })
 
 //Process the client POST request.
-app.post('/upload',function(req,res){
-	
+app.post('/upload', function (req, res) {
+
 	var ts = new Date().getTime();
 	node_address = req.body.node_address;
-    node_channel = req.body.node_channel;
+	node_channel = req.body.node_channel;
 	node_command = req.body.node_command;
 	node_status = req.body.node_status;
 	node_active_md = req.body.node_active_md;
 	node_app_md = req.body.node_app_md;
 	node_active_total = req.body.node_active_total;
 	node_app_total = req.body.node_app_total;
-	
+
 	/* Converts uint32 variables to binary */
 	node_active_total_binary = binaryString(node_active_total);
 	node_active_md_binary = binaryString(node_active_md);
 	node_app_md_binary = binaryString(node_app_md);
-    node_app_total_binary = binaryString(node_app_total);
-	
+	node_app_total_binary = binaryString(node_app_total);
+
 	/* Converts binary into single-point precision float */
 	node_active_total_float = fromBits(node_active_total_binary);
 	node_active_md_float = fromBits(node_active_md_binary);
 	node_app_md_float = fromBits(node_app_md_binary);
 	node_app_total_float = fromBits(node_app_total_binary);
-	
+
 	/* Display on log for users to see */
 	console.log("Timestamp:" + ts + " Device:" + node_address + " Channel:" + node_channel + " Command:" + node_command + " Status:" + node_status + " ActiveMD:" + node_active_md_float + " ApparentMD:" + node_app_md_float + " ActiveTotal:" + node_active_total_float + " ApparentTotal:" + node_app_total_float + "\n");
 	//counter++;
-	
+
+	/* onboard endnode by endnode vendorThingID */
+	var vendorThingID = node_address.replace(/:/g, ''); // remove ':'
+	var endnode = kii.getEndnode(vendorThingID);
+	if (endnode) {
+		kii.updateEndnodeState(vendorThingID, node_status);
+	} else {
+		kii.onboardEndnodeByOwner(vendorThingID).then(function (res) {
+			kii.updateEndnodeState(vendorThingID, node_status);
+		}, function (err) {
+			console.log('endnode onboard error:', err);
+		});
+	}
+
 	/* Upload to MCS using MQTT, this is an sample code that worked*/
 	/*switch(counter)
 	{
 		case 1:
 		myApp.emit('rx610_node_01','',node_active_total_float);
 		break;
-		
+
 		case 2:
 		myApp.emit('rx610_node_02','',node_active_total_float);
 		break;
-		
+
 		case 3:
 		myApp.emit('rx610_node_03','',node_active_total_float);
 		break;
-		
+
 		case 4:
 		myApp.emit('rx610_node_04','',node_active_total_float);
 		break;
-		
+
 		case 5:
 		myApp.emit('rx610_node_05','',node_active_total_float);
 		break;
-		
+
 		case 6:
 		myApp.emit('rx610_node_06','',node_active_total_float);
 		break;
-		
+
 		case 7:
 		myApp.emit('rx610_node_07','',node_active_total_float);
 		break;
-		
+
 		case 8:
 		myApp.emit('rx610_node_08','',node_active_total_float);
 		break;
-		
+
 		case 9:
 		myApp.emit('rx610_node_09','',node_active_total_float);
 		break;
-		
+
 		case 10:
 		myApp.emit('rx610_node_10','',node_active_total_float);
 		break;
-		
+
 		default:
 		counter == 0;
 		break;
 	}*/
-	
+
 	/* this segment will the portion to call the upload to cloud API */
 	//var sensor = {"sensor_guid":sensor_guid,"temperature":temperature,"pressure":pressure,"humidity":humidity,"ts":ts};
 	//var sensor = {"sensor_guid":sensor_guid,"temperature":temperature,"pressure":pressure,"ts":ts};
-	//device.publish('topic/iaproject',JSON.stringify(sensor));	
+	//device.publish('topic/iaproject',JSON.stringify(sensor));
 	//myLcd.updateInfo();
-  	res.end("done"); 
-});     				
+	res.end("done");
+});
 
 
 /*** TCP Server for 7687 Clinets ***/
 /* for command which will not be in POC's phase */
 
-net.createServer( function(socket) {
-	
+net.createServer(function (socket) {
+
 	// Identify this client
 	socket.name = socket.remoteAddress + ":" + socket.remotePort
-	
+
 	// Put this new client in the list
 	clients.push(socket);
-	
+
 	// Send a nice welcome message and announce
 	socket.write(socket.name + " is connected to the 7688 IoT Gateway\n");
 	console.log(socket.name + " is now connected!\n");
-	
+
 	// Handle incoming tcp heartbeat messages from clients.
 	socket.on('data', function (data) {
-    //broadcast(socket.name + "> " + data, socket);
-	console.log(socket.name + " sent a heartbeat that is: " + data);
-    socket.write("Acknowledged that heartbeat is received\n");
+		//broadcast(socket.name + "> " + data, socket);
+		console.log(socket.name + " sent a heartbeat that is: " + data);
+		socket.write("Acknowledged that heartbeat is received\n");
 	});
-	
-    socket.on('end',function(){
-	clients.splice(clients.indexOf(socket), 1);
-	//broadcast(socket.name + " is disconnected\n");
-	console.log('client disconnected.\r\n');
-    });
-	
+
+	socket.on('end', function () {
+		clients.splice(clients.indexOf(socket), 1);
+		//broadcast(socket.name + " is disconnected\n");
+		console.log('client disconnected.\r\n');
+	});
+
 	socket.on('stateChange', function () {
-    clients.splice(clients.indexOf(socket), 1);
-    //broadcast(socket.name + " is disconnected\n");
+		clients.splice(clients.indexOf(socket), 1);
+		//broadcast(socket.name + " is disconnected\n");
 	});
 
-    socket.on('error',function(){
-	console.log('error handling...\r\n');
-    });
+	socket.on('error', function () {
+		console.log('error handling...\r\n');
+	});
 
-    socket.write('Server Echo for connection\r\n');
-}).listen(8081,'192.168.100.1');
+	socket.write('Server Echo for connection\r\n');
+}).listen(8081, '192.168.100.1');
 console.log('TCP Server:PORT 8081');
 
 
 /*** LCD for information display ***/
-var myLcd = new LCD.Jhd1313m1 (0, 0x3E, 0x62);
+var myLcd = new LCD.Jhd1313m1(0, 0x3E, 0x62);
 
 //Add the updateInfo function for future enhancement of product
-/*myLcd.updateInfo = function(){	
-	
+/*myLcd.updateInfo = function(){
+
 	myLcd.setCursor(0,0);
-	
-    var rgbValues={ red: 0, green: 0, blue: 0 };   
+
+    var rgbValues={ red: 0, green: 0, blue: 0 };
     rgbValues.red   = Math.floor(Math.random() * 255);
     rgbValues.green = Math.floor(Math.random() * 255);
-    rgbValues.blue  = Math.floor(Math.random() * 255);		
+    rgbValues.blue  = Math.floor(Math.random() * 255);
 	myLcd.setColor(rgbValues.red, rgbValues.green, rgbValues.blue);
-	
+
     myLcd.setCursor(0,0);
     myLcd.write(sensor_guid);
 	myLcd.setCursor(0,7);
     myLcd.write(pressure);
 	myLcd.setCursor(1,0);
-	myLcd.write(temperature);	
+	myLcd.write(temperature);
 	myLcd.setCursor(1,7);
 	myLcd.write(humidity);
-	
+
 };*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /***/ }),
 /* 166 */
@@ -43598,7 +43593,7 @@ module.exports =
 {
   parallel      : __webpack_require__(171),
   serial        : __webpack_require__(172),
-  serialOrdered : __webpack_require__(136)
+  serialOrdered : __webpack_require__(137)
 };
 
 
@@ -43638,9 +43633,9 @@ function defer(fn)
 /* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var iterate    = __webpack_require__(133)
-  , initState  = __webpack_require__(134)
-  , terminator = __webpack_require__(135)
+var iterate    = __webpack_require__(134)
+  , initState  = __webpack_require__(135)
+  , terminator = __webpack_require__(136)
   ;
 
 // Public API
@@ -43687,7 +43682,7 @@ function parallel(list, iterator, callback)
 /* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var serialOrdered = __webpack_require__(136);
+var serialOrdered = __webpack_require__(137);
 
 // Public API
 module.exports = serial;
@@ -44726,7 +44721,7 @@ ForeverAgent.SSL = ForeverAgentSSL
 var util = __webpack_require__(0)
   , Agent = __webpack_require__(31).Agent
   , net = __webpack_require__(8)
-  , tls = __webpack_require__(162)
+  , tls = __webpack_require__(163)
   , AgentSSL = __webpack_require__(57).Agent
   
 function getConnectionName(host, port) {  
@@ -44864,7 +44859,7 @@ function createConnectionSSL (port, host, options) {
 /* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var CombinedStream = __webpack_require__(138);
+var CombinedStream = __webpack_require__(139);
 var util = __webpack_require__(0);
 var path = __webpack_require__(26);
 var http = __webpack_require__(31);
@@ -45437,7 +45432,7 @@ if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || '')) {
   })
 }
 
-module.exports = patch(__webpack_require__(141))
+module.exports = patch(__webpack_require__(142))
 if (process.env.TEST_GRACEFUL_FS_GLOBAL_PATCH) {
   module.exports = patch(fs)
 }
@@ -45803,7 +45798,7 @@ function legacy (fs) {
 /* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var fs = __webpack_require__(141)
+var fs = __webpack_require__(142)
 var constants = __webpack_require__(269)
 
 var origCwd = process.cwd
@@ -46161,7 +46156,7 @@ module.exports = ValidationError
 
 var Promise = __webpack_require__(241)
 var runner = __webpack_require__(189)
-var schemas = __webpack_require__(142)
+var schemas = __webpack_require__(143)
 
 var promisify = function (schema) {
   return function (data) {
@@ -46188,7 +46183,7 @@ Object.keys(schemas).map(function (name) {
 "use strict";
 
 
-var schemas = __webpack_require__(142)
+var schemas = __webpack_require__(143)
 var ValidationError = __webpack_require__(187)
 var validator = __webpack_require__(215)
 
@@ -46781,7 +46776,7 @@ module.exports = {
 
 var Url = __webpack_require__(10);
 var Hoek = __webpack_require__(50);
-var Cryptiles = __webpack_require__(139);
+var Cryptiles = __webpack_require__(140);
 var Crypto = __webpack_require__(81);
 var Utils = __webpack_require__(49);
 
@@ -47155,7 +47150,7 @@ exports.message = function (host, port, message, options) {
 // Export sub-modules
 
 exports.error = exports.Error = __webpack_require__(48);
-exports.sntp = __webpack_require__(150);
+exports.sntp = __webpack_require__(151);
 
 exports.server = __webpack_require__(207);
 exports.client = __webpack_require__(205);
@@ -47177,7 +47172,7 @@ exports.uri = {
 
 var Boom = __webpack_require__(48);
 var Hoek = __webpack_require__(50);
-var Cryptiles = __webpack_require__(139);
+var Cryptiles = __webpack_require__(140);
 var Crypto = __webpack_require__(81);
 var Utils = __webpack_require__(49);
 
@@ -50663,7 +50658,7 @@ exports.compile = compile
 var mod_assert = __webpack_require__(16);
 var mod_util = __webpack_require__(0);
 
-var mod_extsprintf = __webpack_require__(140);
+var mod_extsprintf = __webpack_require__(141);
 var mod_verror = __webpack_require__(266);
 var mod_jsonschema = __webpack_require__(222);
 
@@ -51152,7 +51147,7 @@ function mergeObjects(provided, overrides, defaults)
 
 "use strict";
 
-var Q = __webpack_require__(145);
+var Q = __webpack_require__(146);
 var request = __webpack_require__(245);
 var model_1 = __webpack_require__(231);
 var KiiHelper = (function () {
@@ -68708,12 +68703,12 @@ switch (os.platform()) {
 
     case 'darwin':
     case 'sunos':
-        _getMacAddress = __webpack_require__(144);
+        _getMacAddress = __webpack_require__(145);
         break;
         
     default:
         console.warn("node-macaddress: Unkown os.platform(), defaulting to `unix'.");
-        _getMacAddress = __webpack_require__(144);
+        _getMacAddress = __webpack_require__(145);
         break;
 
 }
@@ -69291,7 +69286,7 @@ module.exports = Promise;
 "use strict";
 
 
-var utils = __webpack_require__(148);
+var utils = __webpack_require__(149);
 
 var has = Object.prototype.hasOwnProperty;
 
@@ -69464,8 +69459,8 @@ module.exports = function (str, opts) {
 "use strict";
 
 
-var utils = __webpack_require__(148);
-var formats = __webpack_require__(146);
+var utils = __webpack_require__(149);
+var formats = __webpack_require__(147);
 
 var arrayPrefixGenerators = {
     brackets: function brackets(prefix) {
@@ -69673,7 +69668,7 @@ module.exports = function (object, opts) {
 
 
 var extend                = __webpack_require__(79)
-  , cookies               = __webpack_require__(149)
+  , cookies               = __webpack_require__(150)
   , helpers               = __webpack_require__(113)
 
 var paramsHaveRequestBody = helpers.paramsHaveRequestBody
@@ -70305,8 +70300,8 @@ exports.Har = Har
 
 
 var uuid = __webpack_require__(123)
-  , CombinedStream = __webpack_require__(138)
-  , isstream = __webpack_require__(143)
+  , CombinedStream = __webpack_require__(139)
+  , isstream = __webpack_require__(144)
 
 
 function Multipart (request) {
@@ -70424,7 +70419,7 @@ exports.Multipart = Multipart
 
 
 var url = __webpack_require__(10)
-  , qs = __webpack_require__(147)
+  , qs = __webpack_require__(148)
   , caseless = __webpack_require__(69)
   , uuid = __webpack_require__(123)
   , oauth = __webpack_require__(240)
@@ -70577,7 +70572,7 @@ exports.OAuth = OAuth
 "use strict";
 
 
-var qs = __webpack_require__(147)
+var qs = __webpack_require__(148)
   , querystring = __webpack_require__(27)
 
 
@@ -70998,10 +70993,10 @@ var http = __webpack_require__(31)
   , ForeverAgent = __webpack_require__(179)
   , FormData = __webpack_require__(180)
   , extend = __webpack_require__(79)
-  , isstream = __webpack_require__(143)
+  , isstream = __webpack_require__(144)
   , isTypedArray = __webpack_require__(218).strict
   , helpers = __webpack_require__(113)
-  , cookies = __webpack_require__(149)
+  , cookies = __webpack_require__(150)
   , getProxyFromURI = __webpack_require__(247)
   , Querystring = __webpack_require__(251).Querystring
   , Har = __webpack_require__(248).Har
@@ -73493,7 +73488,7 @@ function getCertType(key) {
 
 // Copyright 2016 Joyent, Inc.
 
-var x509 = __webpack_require__(154);
+var x509 = __webpack_require__(155);
 
 module.exports = {
 	read: read,
@@ -73716,15 +73711,15 @@ function alignedWrite(buffer) {
 
 var net = __webpack_require__(8);
 var urlParse = __webpack_require__(10).parse;
-var pubsuffix = __webpack_require__(157);
-var Store = __webpack_require__(158).Store;
+var pubsuffix = __webpack_require__(158);
+var Store = __webpack_require__(159).Store;
 var MemoryCookieStore = __webpack_require__(261).MemoryCookieStore;
-var pathMatch = __webpack_require__(155).pathMatch;
+var pathMatch = __webpack_require__(156).pathMatch;
 var VERSION = __webpack_require__(262).version;
 
 var punycode;
 try {
-  punycode = __webpack_require__(161);
+  punycode = __webpack_require__(162);
 } catch(e) {
   console.warn("cookie: can't load punycode; won't use punycode for domain normalization");
 }
@@ -75015,7 +75010,7 @@ module.exports = {
   pathMatch: pathMatch,
   getPublicSuffix: pubsuffix.getPublicSuffix,
   cookieCompare: cookieCompare,
-  permuteDomain: __webpack_require__(156).permuteDomain,
+  permuteDomain: __webpack_require__(157).permuteDomain,
   permutePath: permutePath,
   canonicalDomain: canonicalDomain
 };
@@ -75057,9 +75052,9 @@ module.exports = {
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-var Store = __webpack_require__(158).Store;
-var permuteDomain = __webpack_require__(156).permuteDomain;
-var pathMatch = __webpack_require__(155).pathMatch;
+var Store = __webpack_require__(159).Store;
+var permuteDomain = __webpack_require__(157).permuteDomain;
+var pathMatch = __webpack_require__(156).pathMatch;
 var util = __webpack_require__(0);
 
 function MemoryCookieStore() {
@@ -75346,7 +75341,7 @@ module.exports = {
 
 
 var net = __webpack_require__(8)
-  , tls = __webpack_require__(162)
+  , tls = __webpack_require__(163)
   , http = __webpack_require__(31)
   , https = __webpack_require__(57)
   , events = __webpack_require__(56)
@@ -75595,8 +75590,8 @@ exports.debug = debug // for test
 // Unique ID creation requires a high quality random # generator.  We feature
 // detect to determine the best RNG source, normalizing to a function that
 // returns 128-bits of randomness, since that's what's usually required
-var rng = __webpack_require__(160);
-var bytesToUuid = __webpack_require__(159);
+var rng = __webpack_require__(161);
+var bytesToUuid = __webpack_require__(160);
 
 // **`v1()` - Generate time-based UUID**
 //
@@ -75701,8 +75696,8 @@ module.exports = v1;
 /* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var rng = __webpack_require__(160);
-var bytesToUuid = __webpack_require__(159);
+var rng = __webpack_require__(161);
+var bytesToUuid = __webpack_require__(160);
 
 function v4(options, buf, offset) {
   var i = buf && offset || 0;
@@ -75743,7 +75738,7 @@ module.exports = v4;
 var mod_assert = __webpack_require__(16);
 var mod_util = __webpack_require__(0);
 
-var mod_extsprintf = __webpack_require__(140);
+var mod_extsprintf = __webpack_require__(141);
 
 /*
  * Public interface
@@ -75984,7 +75979,7 @@ module.exports = require("jju");
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(165);
-__webpack_require__(163);
+__webpack_require__(131);
 __webpack_require__(130);
 __webpack_require__(28);
 __webpack_require__(8);

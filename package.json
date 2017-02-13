@@ -5,7 +5,7 @@
   "main": "./src/main.js",
   "scripts": {
     "init": "node ./src/init.js",
-    "start": "node ./src/kii_mt7688_v11.js",
+    "start": "node ./src/main.js",
     "test": "node ./src/test.js"
   },
   "author": "",

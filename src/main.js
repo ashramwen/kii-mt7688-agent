@@ -114,7 +114,9 @@ app.post('/upload', function (req, res) {
 		'activeTotal': node_active_total_float,
 		'activeMD': node_active_md_float,
 		'apparentTotal': node_app_total_float,
-		'apparentMD': node_app_md_float
+		'apparentMD': node_app_md_float,
+		'Timestamp': ts,
+		'deviceID': node_address
 	}
 	if (endnode) {
 		kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);

@@ -58,6 +58,12 @@ After [deploy] (#Deploy) and [configuration] (#Configuration), we can run it.
 node main.js
 ```
 
+In some old node, we may need to force garbage collection manually. 
+Just add the option: ‘–expose-gc’
+```sh
+node --expose-gc main.js
+```
+
 <a name="Development"></a>
 ## Development
 ```sh

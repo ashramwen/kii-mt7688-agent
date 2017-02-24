@@ -122,7 +122,9 @@ app.post('/upload', function (req, res) {
 		kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
 	} else {
 		kii.onboardEndnodeByOwner(vendorThingID).then(function (res) {
-			kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
+			setTimeout(function () {
+				kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
+			}, 1000);
 		}, function (err) {
 			console.log('endnode onboard error:', err);
 		});

@@ -14951,6 +14951,8 @@ var KiiBase = (function () {
     function KiiBase() {
         this.counter = 0;
         this.maxRequest = 10;
+        if (global.gc)
+            console.log('gc mode.');
         this.gateway = new model_1.Gateway();
     }
     KiiBase.prototype.setApp = function (_appID, _appKey, _site) {
@@ -15000,7 +15002,6 @@ var KiiBase = (function () {
         return deferred.promise;
     };
     KiiBase.prototype.gcByCounter = function () {
-        console.log('gcByCounter');
         if (!global.gc)
             return;
         if (this.counter < this.maxRequest) {
@@ -15008,16 +15009,13 @@ var KiiBase = (function () {
         }
         else {
             this.counter = 0;
-            console.log('gc');
             global.gc();
         }
     };
     KiiBase.prototype.gcByTime = function () {
-        console.log('gcByTime');
         if (!global.gc)
             return;
-        setTimeout(function () {
-            console.log('gc');
+        setInterval(function () {
             global.gc();
         }, 60000);
     };
@@ -18635,7 +18633,7 @@ function onboardGateway(retry) {
         }, 5000);
     });
 }
-// onboardGateway();
+onboardGateway();
 setInterval(function () {
     kii.updateEndnodeOnline();
 }, INTERVAL);

@@ -36,7 +36,7 @@ or we can just use
 ```
 npm install  # will install the depedencies set in the package.json
 ```
-All of them can be bundled into the dist.
+All of them can NOT be bundled into the dist.
 
 <a name="Configuration"></a>
 ## Configuration

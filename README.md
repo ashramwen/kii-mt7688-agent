@@ -4,6 +4,7 @@
 * [Deploy] (#Deploy)
 * [Configuration] (#Configuration)
 * [Serving] (#Serving)
+* [MQTT] (#Mqtt)
 * [Development] (#Development)
 
 <a name="Build"></a>
@@ -17,20 +18,25 @@ The build artifacts will be stored in the `dist/` directory.
 ## Deploy
 In the `dist/` directory,
 ```
-├── main.js      # main js file
-├── mt7688.js    # bundled with the original kii_mt7688_v11.js
+├── main.js        # main js file
+├── package.json   # specifics of npm's package.json handling
 └── resource
-    └── db.json  # configuration
+    └── db.json    # configuration
 ```
-All we need are `main.js` and `resource/db.json`.
-Copy these two files with their structure into the gateway.
+All we need are in the `dist` folder.
+Copy these files with their structure into the gateway.
 
-Also We need to install 2 additional packages manually in the gateway.
+Also We need to install some additional packages manually in the gateway.
 ```sh
 npm install express
 npm install jju
+npm install ws@1.1.2
 ```
-Neither of them can be bundled into the dist.
+or we can just use
+```
+npm install  # will install the depedencies set in the package.json
+```
+All of them can be bundled into the dist.
 
 <a name="Configuration"></a>
 ## Configuration
@@ -62,6 +68,17 @@ In some old node, we may need to force garbage collection manually.
 Just add the option: `--expose-gc’
 ```sh
 node --expose-gc main.js
+```
+
+<a name="Mqtt"></a>
+## MQTT
+Now the agent supports MQTT.
+```sh
+node main.js --mqtt
+```
+Also gc mode is
+```sh
+node --expose-gc main.js --mqtt
 ```
 
 <a name="Development"></a>

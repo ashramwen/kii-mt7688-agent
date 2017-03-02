@@ -2,10 +2,12 @@
 
 * [Creating a build] (#Build)
 * [Deploy] (#Deploy)
+* [User Access Token Generation] (#TokenGeneration)
 * [Configuration] (#Configuration)
 * [Serving] (#Serving)
 * [MQTT] (#Mqtt)
 * [Development] (#Development)
+* [Gateway Replacement] (#GatewayReplacement)
 
 <a name="Build"></a>
 ## Creating a build
@@ -37,6 +39,16 @@ or we can just use
 npm install  # will install the depedencies set in the package.json
 ```
 All of them can NOT be bundled into the dist.
+
+<a name="TokenGeneration"></a>
+## User Access Token Generation
+```sh
+curl -X POST -H "Content-Type: application/json" -d '{
+	"grant_type": "password",
+	"username": {username},
+	"password": {password}
+}' "https://api-sg.kii.com/api/apps/{appID}/oauth2/token"
+```
 
 <a name="Configuration"></a>
 ## Configuration
@@ -87,3 +99,15 @@ node --expose-gc main.js --mqtt
 # Install the dependencies
 npm install
 ```
+
+<a name="GatewayReplacement"></a>
+## Gateway Replacement
+In order to replace a gateway while keeping the data and identity of its current endnode devices, the following steps need to be executed:
+
+ 1. Unpair relationship of existing gateway and endnode
+ 
+```sh
+curl -X DELETE -H "Authorization: Bearer {accessToken}" "https://api-sg.kii.com/thing-if/apps/{appID}/things/{gatewayThingID}/end-nodes/{endnodeThingID}" 
+```
+ 2. Connect the endnode devices to a new gateway
+ 3. Follow the instruction of this page on the new gateway. If you copy the code files from the old gateway, please not forget to clean the `db.json` file so that gateway and endnode information is deleted.

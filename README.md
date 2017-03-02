@@ -65,7 +65,7 @@ node main.js
 ```
 
 In some old node, we may need to force garbage collection manually.
-Just add the option: `--expose-gc’
+Just add the option: `--expose-gc`
 ```sh
 node --expose-gc main.js
 ```

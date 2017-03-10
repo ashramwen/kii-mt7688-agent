@@ -36,6 +36,7 @@ module.exports = function () {
       }])
     ],
     externals: {
+      'ajv': 'ajv',
       'bufferutil': 'bufferutil',
       'express': 'require("express")',
       'jju': 'require("jju")',

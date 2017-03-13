@@ -103,6 +103,15 @@ app.post('/upload', function (req, res) {
 	console.log("Timestamp:" + ts + " Device:" + node_address + " Channel:" + node_channel + " Command:" + node_command + " Status:" + node_status + " ActiveMD:" + node_active_md_float + " ApparentMD:" + node_app_md_float + " ActiveTotal:" + node_active_total_float + " ApparentTotal:" + node_app_total_float + "\n");
 	//counter++;
 
+
+	function updateState(vendorThingID, thingStatus) {
+		try {
+			kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
+		} catch (err) {
+			console.log('Agent UpdateState Error - ' + new Date().valueOf() + ':', err);
+		}
+	}
+
 	function updateEndnodeStateError(err) {
 		console.log('endnode updateState error:', err);
 	}
@@ -119,15 +128,19 @@ app.post('/upload', function (req, res) {
 		'deviceID': node_address
 	}
 	if (endnode) {
-		kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
+		updateState(vendorThingID, thingStatus);
 	} else {
-		kii.onboardEndnodeByOwner(vendorThingID).then(function (res) {
-			setTimeout(function () {
-				kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
-			}, 1000);
-		}, function (err) {
-			console.log('endnode onboard error:', err);
-		});
+		try {
+			kii.onboardEndnodeByOwner(vendorThingID).then(function (res) {
+				setTimeout(function () {
+					updateState(vendorThingID, thingStatus);
+				}, 1000);
+			}, function (err) {
+				console.log('endnode onboard error:', err);
+			});
+		} catch (err) {
+			console.log('Agent OnboardEndnode Error - ' + new Date().valueOf() + ':', err);
+		}
 	}
 
 	/* Upload to MCS using MQTT, this is an sample code that worked*/

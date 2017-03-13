@@ -19127,25 +19127,33 @@ var INTERVAL = 300000; // 5 mins
 var i = 0;
 
 function onboardGateway(retry) {
-    kii.onboardGatewayByOwner().then(function (res) {
-        if (res.thingID) {
-            console.log('Gateway onboarding is done.')
-        } else {
-            console.log('Gateway onboard failed. Retry in 5 secs: ' + ++i + ' times.')
+    try {
+        kii.onboardGatewayByOwner().then(function (res) {
+            if (res.thingID) {
+                console.log('Gateway onboarding is done.')
+            } else {
+                console.log('Gateway onboard failed. Retry in 5 secs: ' + ++i + ' times.')
+                setTimeout(function () {
+                    onboardGateway();
+                }, 5000);
+            }
+        }, function () {
+            console.log('Gateway onboard failed. Retry in 5 secs.')
             setTimeout(function () {
                 onboardGateway();
             }, 5000);
-        }
-    }, function () {
-        console.log('Gateway onboard failed. Retry in 5 secs.')
-        setTimeout(function () {
-            onboardGateway();
-        }, 5000);
-    });
+        });
+    } catch (err) {
+        console.log('Agent OnboardGateway Error - ' + new Date().valueOf() + ':', err);
+    }
 }
 onboardGateway();
 setInterval(function () {
-    kii.updateEndnodeOnline();
+    try {
+        kii.updateEndnodeOnline();
+    } catch (err) {
+        console.log('Agent UpdateOnline Error - ' + new Date().valueOf() + ':', err);
+    }
 }, INTERVAL);
 
 module.exports = exports = kii;
@@ -28697,6 +28705,15 @@ app.post('/upload', function (req, res) {
 	console.log("Timestamp:" + ts + " Device:" + node_address + " Channel:" + node_channel + " Command:" + node_command + " Status:" + node_status + " ActiveMD:" + node_active_md_float + " ApparentMD:" + node_app_md_float + " ActiveTotal:" + node_active_total_float + " ApparentTotal:" + node_app_total_float + "\n");
 	//counter++;
 
+
+	function updateState(vendorThingID, thingStatus) {
+		try {
+			kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
+		} catch (err) {
+			console.log('Agent UpdateState Error - ' + new Date().valueOf() + ':', err);
+		}
+	}
+
 	function updateEndnodeStateError(err) {
 		console.log('endnode updateState error:', err);
 	}
@@ -28713,15 +28730,19 @@ app.post('/upload', function (req, res) {
 		'deviceID': node_address
 	}
 	if (endnode) {
-		kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
+		updateState(vendorThingID, thingStatus);
 	} else {
-		kii.onboardEndnodeByOwner(vendorThingID).then(function (res) {
-			setTimeout(function () {
-				kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
-			}, 1000);
-		}, function (err) {
-			console.log('endnode onboard error:', err);
-		});
+		try {
+			kii.onboardEndnodeByOwner(vendorThingID).then(function (res) {
+				setTimeout(function () {
+					updateState(vendorThingID, thingStatus);
+				}, 1000);
+			}, function (err) {
+				console.log('endnode onboard error:', err);
+			});
+		} catch (err) {
+			console.log('Agent OnboardEndnode Error - ' + new Date().valueOf() + ':', err);
+		}
 	}
 
 	/* Upload to MCS using MQTT, this is an sample code that worked*/

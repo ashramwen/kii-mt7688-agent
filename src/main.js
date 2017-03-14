@@ -104,9 +104,10 @@ app.post('/upload', function (req, res) {
 	//counter++;
 
 
-	function updateState(vendorThingID, thingStatus) {
+	function updateState(endnode, thingStatus) {
+		endnode.state = thingStatus;
 		try {
-			kii.updateEndnodeState(vendorThingID, thingStatus).then(function (res) {}, updateEndnodeStateError);
+			kii.updateEndnodeState(endnode).then(function (res) {}, updateEndnodeStateError);
 		} catch (err) {
 			console.log('Agent UpdateState Error - ' + new Date().valueOf() + ':', err);
 		}
@@ -128,12 +129,13 @@ app.post('/upload', function (req, res) {
 		'deviceID': node_address
 	}
 	if (endnode) {
-		updateState(vendorThingID, thingStatus);
+		updateState(endnode, thingStatus);
 	} else {
 		try {
 			kii.onboardEndnodeByOwner(vendorThingID).then(function (res) {
+				endnode = kii.getEndnode(vendorThingID);
 				setTimeout(function () {
-					updateState(vendorThingID, thingStatus);
+					updateState(endnode, thingStatus);
 				}, 1000);
 			}, function (err) {
 				console.log('endnode onboard error:', err);

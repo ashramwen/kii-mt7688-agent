@@ -2,8 +2,6 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-
-## [0.1.8] - 2017-03-15
 ### Added
 - Disconnecting handle.
 
@@ -17,6 +15,5 @@ All notable changes to this project will be documented in this file.
 - Catch `kii-gateway-agent error`.
 - Upgrade [kii-gateway-agent](https://github.com/ashramwen/kii-gateway-agent) to `0.2.5`.
 
-[Unreleased]: https://github.com/ashramwen/kii-mt7688-agent/compare/v0.1.8...HEAD
-[0.1.8]: https://github.com/ashramwen/kii-mt7688-agent/compare/v0.1.7...v0.1.8
+[Unreleased]: https://github.com/ashramwen/kii-mt7688-agent/compare/v0.1.7...HEAD
 [0.1.7]: https://github.com/ashramwen/kii-mt7688-agent/compare/v0.1.6...v0.1.7

@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Modify `updateEndnodeState` method.
+- Upgrade [kii-gateway-agent](https://github.com/ashramwen/kii-gateway-agent) to `0.2.6`.
 
 ## [0.1.7] - 2017-03-13
 ### Added

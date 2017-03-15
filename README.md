@@ -7,6 +7,7 @@
 * [Serving] (#Serving)
 * [MQTT] (#Mqtt)
 * [Development] (#Development)
+* [Upgrade kii-gateway-agent] (#Upgrade)
 * [Gateway Replacement] (#GatewayReplacement)
 
 <a name="Build"></a>
@@ -100,14 +101,21 @@ node --expose-gc main.js --mqtt
 npm install
 ```
 
+<a name="Upgrade"></a>
+## Force to upgrade kii-gateway-agent manually
+```sh
+# upgrade kii-gateway-agent
+npm install kii-gateway-agent@latest
+```
+
 <a name="GatewayReplacement"></a>
 ## Gateway Replacement
 In order to replace a gateway while keeping the data and identity of its current endnode devices, the following steps need to be executed:
 
  1. Unpair relationship of existing gateway and endnode
- 
+
 ```sh
-curl -X DELETE -H "Authorization: Bearer {accessToken}" "https://api-sg.kii.com/thing-if/apps/{appID}/things/{gatewayThingID}/end-nodes/{endnodeThingID}" 
+curl -X DELETE -H "Authorization: Bearer {accessToken}" "https://api-sg.kii.com/thing-if/apps/{appID}/things/{gatewayThingID}/end-nodes/{endnodeThingID}"
 ```
  2. Connect the endnode devices to a new gateway
  3. Follow the instruction of this page on the new gateway. If you copy the code files from the old gateway, please not forget to clean the `db.json` file so that gateway and endnode information is deleted.

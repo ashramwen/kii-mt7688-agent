@@ -40,6 +40,7 @@ var fromBits = require('math-float32-from-bits');
 //var mcs			= require('mcsjs');
 
 var kii = require('./kii');
+var numeral = require('numeral');
 
 var node_active_md_binary, node_active_total_binary, node_app_md_binary, node_app_total_binary; //binary variables
 var node_active_md_float, node_active_total_float, node_app_md_float, node_app_total_float; //float value converted
@@ -105,16 +106,19 @@ app.post('/upload', function (req, res) {
 
 
 	function updateState(endnode, thingStatus) {
-		endnode.state = thingStatus;
 		try {
-			kii.updateEndnodeState(endnode).then(function (res) {}, updateEndnodeStateError);
+			var state = endnode.state;
+			thingStatus.activeTotalChange = numeral(thingStatus.activeTotal).subtract(state.activeTotal).value();
+			thingStatus.apparentTotalChange = numeral(thingStatus.apparentTotal).subtract(state.apparentTotal).value();
+			kii.updateEndnodeState(endnode, thingStatus).then(
+				function (res) {},
+				function (err) {
+					console.log('endnode updateState error:', err);
+				}
+			);
 		} catch (err) {
 			console.log('Agent UpdateState Error - ' + new Date().valueOf() + ':', err);
 		}
-	}
-
-	function updateEndnodeStateError(err) {
-		console.log('endnode updateState error:', err);
 	}
 
 	/* onboard endnode by endnode vendorThingID */

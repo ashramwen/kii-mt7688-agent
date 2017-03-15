@@ -107,9 +107,11 @@ app.post('/upload', function (req, res) {
 
 	function updateState(endnode, thingStatus) {
 		try {
-			var state = endnode.state;
-			thingStatus.activeTotalChange = numeral(thingStatus.activeTotal).subtract(state.activeTotal).value();
-			thingStatus.apparentTotalChange = numeral(thingStatus.apparentTotal).subtract(state.apparentTotal).value();
+			if (endnode.state) {
+				var state = endnode.state;
+				thingStatus.activeTotalChange = numeral(thingStatus.activeTotal).subtract(state.activeTotal || 0).value();
+				thingStatus.apparentTotalChange = numeral(thingStatus.apparentTotal).subtract(state.apparentTotal || 0).value();
+			}
 			kii.updateEndnodeState(endnode, thingStatus).then(
 				function (res) {},
 				function (err) {
@@ -130,7 +132,9 @@ app.post('/upload', function (req, res) {
 		'apparentTotal': node_app_total_float,
 		'apparentMD': node_app_md_float,
 		'Timestamp': ts,
-		'deviceID': node_address
+		'deviceID': node_address,
+		'activeTotalChange': 0,
+		'apparentTotalChange': 0
 	}
 	if (endnode) {
 		updateState(endnode, thingStatus);

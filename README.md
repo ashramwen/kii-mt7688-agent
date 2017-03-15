@@ -21,10 +21,11 @@ The build artifacts will be stored in the `dist/` directory.
 ## Deploy
 In the `dist/` directory,
 ```
-├── main.js        # main js file
-├── package.json   # specifics of npm's package.json handling
+├── main.js              # main js file
+├── package.json         # specifics of npm's package.json handling
 └── resource
-    └── db.json    # configuration
+    ├── db.json          # configuration
+    └── stateCache.json  # cache data
 ```
 All we need are in the `dist` folder.
 Copy these files with their structure into the gateway.

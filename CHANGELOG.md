@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+## [0.1.8] - 2017-03-15
 ### Added
 - Disconnecting handle.
 

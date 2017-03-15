@@ -1,6 +1,6 @@
 # kii-mt7688-agent
 
-* [Creating a build] (#Build)
+* [Creating a build](#Build)
 * [Deploy] (#Deploy)
 * [User Access Token Generation] (#TokenGeneration)
 * [Configuration] (#Configuration)

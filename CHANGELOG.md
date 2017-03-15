@@ -16,3 +16,5 @@ All notable changes to this project will be documented in this file.
 - Try to catch `socket hang up` error.
 - Catch `kii-gateway-agent error`.
 - Upgrade [kii-gateway-agent](https://github.com/ashramwen/kii-gateway-agent) to `0.2.5`.
+
+[Unreleased]: https://github.com/ashramwen/kii-mt7688-agent/compare/v0.1.8...HEAD

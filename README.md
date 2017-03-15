@@ -1,14 +1,14 @@
 # kii-mt7688-agent
 
 * [Creating a build](#Build)
-* [Deploy] (#Deploy)
-* [User Access Token Generation] (#TokenGeneration)
-* [Configuration] (#Configuration)
-* [Serving] (#Serving)
-* [MQTT] (#Mqtt)
-* [Development] (#Development)
-* [Upgrade kii-gateway-agent] (#Upgrade)
-* [Gateway Replacement] (#GatewayReplacement)
+* [Deploy](#Deploy)
+* [User Access Token Generation](#TokenGeneration)
+* [Configuration](#Configuration)
+* [Serving](#Serving)
+* [MQTT](#Mqtt)
+* [Development](#Development)
+* [Upgrade kii-gateway-agent](#Upgrade)
+* [Gateway Replacement](#GatewayReplacement)
 
 <a name="Build"></a>
 ## Creating a build

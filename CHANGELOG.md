@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Disconnecting handle.
 - Load local gateway setting.
+- Add [numeral](https://www.npmjs.com/package/numeral) package.
 
 ### Changed
 - Modify `updateEndnodeState` method.

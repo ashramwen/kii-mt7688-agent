@@ -17,7 +17,7 @@ module.exports = function () {
     entry: {
       main: ['./src/main.js', './src/kii.js', 'numeral', 'ws', 'utf-8-validate', 'bufferutil', 'kii-gateway-agent', 'body-parser', 'net', 'math-uint32-to-binary-string', 'math-float32-from-bits'],
       // mt7688: ['./src/kii_mt7688_v11.js', 'body-parser', 'net', 'math-uint32-to-binary-string', 'math-float32-from-bits'],
-      // test: ['./src/test.js', 'kii-gateway-agent'],
+      // test: ['./src/test.js', './src/kii.js', 'numeral', 'kii-gateway-agent', 'body-parser', 'net', 'math-uint32-to-binary-string', 'math-float32-from-bits'],
       // test2: ['./src/test2.js', './src/kii.js', 'numeral', 'kii-gateway-agent', 'body-parser', 'net', 'math-uint32-to-binary-string', 'math-float32-from-bits'],
       // vendor: ['kii-gateway-agent']
     },

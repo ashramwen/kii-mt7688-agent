@@ -73,7 +73,7 @@ The `app` and `user` sections need to be set.
 
 <a name="Serving"></a>
 ## Serving
-After [deploy] (#Deploy) and [configuration] (#Configuration), we can run it.
+After [deploy](#Deploy) and [configuration](#Configuration), we can run it.
 ```sh
 node main.js
 ```
